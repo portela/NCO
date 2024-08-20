@@ -1,0 +1,16 @@
+
+
+# temporary files => don't commit
+/draft*
+/temp*
+
+# Automatic generated files => don't commit
+wave
+work
+work/*
+work/*.cf
+work/*.vcd
+work/*.ghw
+
+# User generated files => 
+# work/*.gtwk
