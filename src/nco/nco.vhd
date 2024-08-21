@@ -18,9 +18,22 @@ entity nco is
 end entity;
 
 architecture rtl of nco is
-    signal phase_acumulator : unsigned(C_PHASE_WIDTH-1 downto 0);
+    signal phase : std_logic_vector(C_PHASE_WIDTH-1 downto 0);
 
 begin
+
+
+    phase_acc_I : entity work.phase_acc
+        Generic Map(
+            C_PHASE_WIDTH => C_PHASE_WIDTH
+        )
+        Port Map( 
+            clk    => clk,
+            reset  => reset,
+		    enable => enable,
+            fcw    => fcw,
+            phase  => phase
+        );
 
     sine_lut_I : entity work.sine_lut
         Generic Map(
@@ -28,21 +41,8 @@ begin
             C_SINE_WITDH => C_SINE_WITDH
         )
         Port Map( 
-            phase  => std_logic_vector(phase_acumulator),
+            phase  => phase,
             sine   => sine
         );
-
-    process(clk, reset)
-    begin
-        if reset = '0' then
-            phase_acumulator <= (others=>'0');
-
-        elsif rising_edge(clk) then
-            if enable = '1' then
-                phase_acumulator <= phase_acumulator + unsigned(fcw) + 1; 
-            end if;
-        end if;
-    end process;
-
 
 end architecture;
