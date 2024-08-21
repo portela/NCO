@@ -19,22 +19,18 @@ end entity;
 
 architecture rtl of nco is
     signal phase_acumulator : unsigned(C_PHASE_WIDTH-1 downto 0);
-    signal sine_i           : unsigned(C_SINE_WITDH-1 downto 0);
 
-    type sine_lut_type is array (0 to 2**C_PHASE_WIDTH-1) of STD_LOGIC_VECTOR(C_SINE_WITDH-1 downto 0);
-    signal sine_lut : sine_lut_type;
 begin
-    sine_i <= unsigned(sine_lut(to_integer(phase_acumulator)));
-    sine   <= std_logic_vector(sine_i);
 
-
-    GENLUT: FOR i in 0 TO 2**C_PHASE_WIDTH-1 GENERATE
-        CONSTANT x: REAL := (1.0 + SIN(2.0*MATH_PI*real(i)/real(2**C_PHASE_WIDTH-1))) / 2.0;
-        CONSTANT xn: UNSIGNED (15 DOWNTO 0) := to_unsigned(INTEGER(x*real(2**C_SINE_WITDH-1)), 16);
-    BEGIN
-        sine_lut(i) <= STD_LOGIC_VECTOR(xn); 
-    END GENERATE; 
-
+    sine_lut_I : entity work.sine_lut
+        Generic Map(
+            C_PHASE_WIDTH => C_PHASE_WIDTH,
+            C_SINE_WITDH => C_SINE_WITDH
+        )
+        Port Map( 
+            phase  => std_logic_vector(phase_acumulator),
+            sine   => sine
+        );
 
     process(clk, reset)
     begin
