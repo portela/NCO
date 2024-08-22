@@ -16,6 +16,7 @@ signal clk : std_logic;
 
 signal enable : std_logic;
 signal fcw    : std_logic_vector(C_PHASE_WIDTH-1 downto 0);
+signal pcw    : std_logic_vector(C_PHASE_WIDTH-1 downto 0);
 signal sine   : std_logic_vector(C_SINE_WITDH-1 downto 0);
 
 
@@ -38,6 +39,7 @@ begin
             reset   => rst,
             enable  => enable,
             fcw     => fcw,
+            pcw     => pcw,
             sine    => sine
         );
 
@@ -48,7 +50,7 @@ begin
     process
     begin       
         wait for end_simulation;                 
-        assert false report "NONE. End of simulation." severity failure;          
+        assert false report "NONE. End of simulation." severity failure;
     end process;
 
 ---------------------------------------------------------------------------------------
@@ -94,6 +96,18 @@ begin
         wait for end_simulation;
     end process;
 
-
+    process
+    begin
+        pcw <= b"00_0000_0000";
+        wait for 1514 * clk_period;
+        pcw <= b"01_1111_1111";
+        wait for 500 * clk_period;
+        pcw <= b"00_0000_0000";
+        wait for 500 * clk_period;
+        pcw <= b"01_1111_1111";
+        wait for 500 * clk_period;
+        pcw <= b"00_0000_0000";
+        wait for end_simulation;
+    end process;
 
 end architecture;
