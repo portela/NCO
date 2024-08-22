@@ -4,6 +4,8 @@ A **Numerically Controlled Oscillator (NCO)** is a digital signal processing com
 
 This is a synthesizable VHDL implementation of an NCO that can be used in FPGAs, CPLDs or even ASICs. I will be using this in fully digital PLL, Costa Loop, and transceivers (ASK, FSK, BPSK, QPSK, QAM).
 
+![GTKWave with NCO simulation](https://github.com/portela/NCO/blob/develop/doc/images/GTKWave_with_NCO_simulation_using_GHDL.png?raw=true)
+
 ### DDS - Direct digital syntheses 
 
 The NCO works in the digital domain. Its output is just a bunch os bits that represent a sine wave. In order to convert these digital amplitude values into an analog signal, a Digital-to-Analog Converter (DAC) is used. The combination of the NCO with a DAC forms the basis of a Direct Digital Synthesis (DDS) system, which is widely used in signal generators, communication systems, and other applications requiring precise frequency and phase control. Together, these components enable the NCO to generate precise sine wave outputs.
