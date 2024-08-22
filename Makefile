@@ -70,6 +70,7 @@ hello:
 
 compile:
 	$(shell mkdir -p $(WORKDIR))
+	@echo $(ALL_FILES)
 	@$(GHDL_ANALIZE) --workdir=$(WORKDIR) $(ALL_FILES)
 	@echo $(COLOR1) "\t Generating tests: " $(NOCOLOR)
 	@for file in $(TESTBENCH_SOURCE_NAMES); do \
