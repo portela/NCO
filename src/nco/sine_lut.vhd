@@ -34,7 +34,7 @@ begin
 
     GENLUT: FOR i in 0 TO 2**C_PHASE_WIDTH-1 GENERATE
         CONSTANT x: REAL := (1.0 + SIN(2.0*MATH_PI*real(i)/real(2**C_PHASE_WIDTH-1))) / 2.0;
-        CONSTANT xn: UNSIGNED (15 DOWNTO 0) := to_unsigned(INTEGER(x*real(2**C_SINE_WITDH-1)), 16);
+        CONSTANT xn: UNSIGNED (C_SINE_WITDH-1 DOWNTO 0) := to_unsigned(INTEGER(x*real(2**C_SINE_WITDH-1)), C_SINE_WITDH);
     BEGIN
         sine_table(i) <= STD_LOGIC_VECTOR(xn); 
     END GENERATE; 
