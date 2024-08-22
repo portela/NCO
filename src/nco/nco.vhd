@@ -6,6 +6,7 @@ use IEEE.MATH_REAL.ALL;
 entity nco is
     generic(
         C_PHASE_WIDTH : integer := 8;
+        C_MULT_WIDTH  : integer := 2;
         C_SINE_WITDH  : integer := 16
     );
     port(
@@ -14,7 +15,8 @@ entity nco is
 		enable	: in  std_logic;
         fcw     : in  std_logic_vector(C_PHASE_WIDTH-1 downto 0);
         pcw     : in  std_logic_vector(C_PHASE_WIDTH-1 downto 0);
-        --acp     : in  std_logic_vector(C_SINE_WITDH-1 downto 0);
+
+        acw     : in  std_logic_vector(C_MULT_WIDTH-1 downto 0);
 		sine    : out std_logic_vector(C_SINE_WITDH-1 downto 0)
     );
 end entity;
@@ -23,8 +25,9 @@ architecture rtl of nco is
     signal phase_acc : unsigned(C_PHASE_WIDTH-1 downto 0);
     signal phase     : unsigned(C_PHASE_WIDTH-1 downto 0);
 
-
+    signal sine_lut_o : std_logic_vector(C_SINE_WITDH-C_MULT_WIDTH-1 downto 0);
 begin
+    sine <= std_logic_vector(unsigned(sine_lut_o) * unsigned(acw));
 
     process(clk, rst)
     begin
@@ -50,13 +53,13 @@ begin
     sine_lut_I : entity work.sine_lut
         Generic Map(
             C_PHASE_WIDTH => C_PHASE_WIDTH,
-            C_SINE_WITDH => C_SINE_WITDH
+            C_SINE_WITDH => (C_SINE_WITDH-C_MULT_WIDTH)
         )
         Port Map( 
             rst    => rst,
             clk    => clk,
             phase  => std_logic_vector(phase),
-            sine   => sine
+            sine   => sine_lut_o
         );
 
 end architecture;

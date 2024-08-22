@@ -9,6 +9,7 @@ end entity;
 
 Architecture Behavior of nco_tb01 is
 constant C_PHASE_WIDTH : integer := 10;
+constant C_MULT_WIDTH  : integer := 2;
 constant C_SINE_WITDH  : integer := 16;
 
 signal rst : std_logic;
@@ -17,13 +18,14 @@ signal clk : std_logic;
 signal enable : std_logic;
 signal fcw    : std_logic_vector(C_PHASE_WIDTH-1 downto 0);
 signal pcw    : std_logic_vector(C_PHASE_WIDTH-1 downto 0);
+signal acw    : std_logic_vector(C_MULT_WIDTH-1 downto 0);
 signal sine   : std_logic_vector(C_SINE_WITDH-1 downto 0);
 
 
 constant clk_period     : time := 10 ns;
 constant clk_duty_cycle : real := 0.5;
 constant delta_t        : time := 1 ns;
-constant end_simulation : time := 10000 * clk_period;
+constant end_simulation : time := 20000 * clk_period;
 
 begin
 
@@ -32,6 +34,7 @@ begin
     nco_I : entity work.nco
         Generic Map(
             C_PHASE_WIDTH => C_PHASE_WIDTH,
+            C_MULT_WIDTH => C_MULT_WIDTH,
             C_SINE_WITDH => C_SINE_WITDH
         )
         Port Map( 
@@ -40,6 +43,7 @@ begin
             enable  => enable,
             fcw     => fcw,
             pcw     => pcw,
+            acw     => acw,
             sine    => sine
         );
 
@@ -93,21 +97,38 @@ begin
         fcw <= b"00_0000_0100";
         wait for 1000 * clk_period;
         fcw <= b"00_0000_1000";
+        wait for 6000 * clk_period;
+
+        fcw <= b"00_0000_0100";
         wait for end_simulation;
     end process;
 
     process
     begin
         pcw <= b"00_0000_0000";
-        wait for 1514 * clk_period;
+        wait for 10000 * clk_period;
+
         pcw <= b"01_1111_1111";
-        wait for 500 * clk_period;
+        wait for 1000 * clk_period;
         pcw <= b"00_0000_0000";
-        wait for 500 * clk_period;
+        wait for 1000 * clk_period;
         pcw <= b"01_1111_1111";
-        wait for 500 * clk_period;
+        wait for 1000 * clk_period;
         pcw <= b"00_0000_0000";
         wait for end_simulation;
     end process;
+
+    process
+    begin
+        acw <= b"01";
+        wait for 5000 * clk_period;
+        
+        acw <= b"10";
+        wait for 5000 * clk_period;
+        
+        acw <= b"11";
+        wait for end_simulation;
+    end process;
+
 
 end architecture;
