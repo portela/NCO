@@ -36,7 +36,7 @@ begin
         )
         Port Map( 
             clk     => clk,
-            reset   => rst,
+            rst     => rst,
             enable  => enable,
             fcw     => fcw,
             pcw     => pcw,

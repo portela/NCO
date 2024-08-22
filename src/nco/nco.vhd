@@ -9,8 +9,8 @@ entity nco is
         C_SINE_WITDH  : integer := 16
     );
     port(
+        rst     : in  std_logic;
         clk     : in  std_logic;
-        reset   : in  std_logic;
 		enable	: in  std_logic;
         fcw     : in  std_logic_vector(C_PHASE_WIDTH-1 downto 0);
         pcw     : in  std_logic_vector(C_PHASE_WIDTH-1 downto 0);
@@ -26,9 +26,9 @@ architecture rtl of nco is
 
 begin
 
-    process(clk, reset)
+    process(clk, rst)
     begin
-        if reset = '0' then
+        if rst = '0' then
             phase_acc <= (others=>'0');
 
         elsif rising_edge(clk) then
@@ -38,9 +38,9 @@ begin
         end if;
     end process;
 
-    process(clk, reset)
+    process(clk, rst)
     begin
-        if reset = '0' then
+        if rst = '0' then
             phase <= (others=>'0');
         elsif rising_edge(clk) then
             phase <= phase_acc + unsigned(pcw);
@@ -53,6 +53,8 @@ begin
             C_SINE_WITDH => C_SINE_WITDH
         )
         Port Map( 
+            rst    => rst,
+            clk    => clk,
             phase  => std_logic_vector(phase),
             sine   => sine
         );
