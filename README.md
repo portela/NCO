@@ -4,7 +4,7 @@ A **Numerically Controlled Oscillator (NCO)** is a digital signal processing com
 
 This is a synthesizable VHDL implementation of an NCO that can be used in FPGAs, CPLDs or even ASICs. I will be using this in fully digital PLL, Costa Loop, and transceivers (ASK, FSK, BPSK, QPSK, QAM).
 
-![GTKWave with NCO simulation](https://github.com/portela/NCO/blob/develop/doc/images/GTKWave_with_NCO_simulation_using_GHDL.png?raw=true)
+![Basic NCO Architecture](https://github.com/portela/NCO/blob/develop/doc/images/NCO_basic_architecture.png?raw=true)
 
 ### DDS - Direct digital syntheses 
 
@@ -29,6 +29,8 @@ Another key factor in synthesis optimization is the pipeline depth. Since the NC
 
 
 ## Runnig the simulation 
+
+![GTKWave with NCO simulation](https://github.com/portela/NCO/blob/develop/doc/images/GTKWave_with_NCO_simulation_using_GHDL.png?raw=true)
 
 Analyze, run the simulation, and open GTKWave with the simulation data:
 ```console
