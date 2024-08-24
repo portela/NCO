@@ -27,7 +27,7 @@ It's fascinating that such a simple combination — a counter and a table — ca
 
 ### Synthesizable
 
-Not all VHDL code can be synthesized and implemented in hardware. The code in this project is synthesizable and has been tested with Altera (Intel) and Xilinx (AMD) synthesis tools. While the design offers high performance, it should be adjusted for specific device implementations to optimize both performance and resource utilization.
+Not all VHDL code can be synthesized and implemented in hardware. The code in this project is synthesizable and has been tested with Altera (Intel) synthesis tools. While the design offers high performance, it should be adjusted for specific device implementations to optimize both performance and resource utilization.
 
 One crucial aspect for achieving better performance and efficient resource usage is the sine/cosine look-up table (LUT). This LUT contains precomputed sine values, functioning essentially as a read-only memory (ROM). FPGAs offer multiple ways to implement these tables: they can be created using distributed small LUTs within standard cells or by utilizing dedicated memory blocks (such as BRAM, M9K, etc.). The choice between these methods can significantly impact both the speed and resource efficiency of your design.
 
