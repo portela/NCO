@@ -40,7 +40,7 @@ The nco (Numerically Controlled Oscillator) entity is designed with flexible par
 
 ### Core  Parameters
 
-The generic parameters allow customization of the phase width, multiplier width, and sine output width, enabling the design to be adapted for various precision and resource requirements. These generic parameters must be defined before synthesis and cannot be changed during hardware utilization.
+The generic parameters allow customization of the phase width, multiplier width, and sine output width, enabling the design to be adapted for various precision and resource requirements. These **generic** parameters must be defined before synthesis and cannot be changed during hardware utilization.
 
 | Name            | Description                                             | Type    | Default Value |
 |-----------------|---------------------------------------------------------|---------|---------------|
