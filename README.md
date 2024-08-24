@@ -40,7 +40,8 @@ The nco (Numerically Controlled Oscillator) entity is designed with flexible par
 
 ### Core  Parameters
 
-The generic parameters allow customization of the phase width, multiplier width, and sine output width, enabling the design to be adapted for various precision and resource requirements. These **generic** parameters must be defined before synthesis and cannot be changed during hardware utilization.
+The generic parameters allow customization of the phase width, multiplier width, and sine output width, determining the final bit width of each component. These **generic** parameters enable the design to be adapted for various precision and resource requirements. It should be noted that these parameters must be defined before synthesis and cannot be changed during hardware utilization.
+
 
 | Name            | Description                                             | Type    | Default Value |
 |-----------------|---------------------------------------------------------|---------|---------------|
@@ -48,6 +49,7 @@ The generic parameters allow customization of the phase width, multiplier width,
 | `C_MULT_WIDTH`  | Defines the bit width of the amplitude control word (ACW).        | integer | 2             |
 | `C_SINE_WIDTH`  | Defines the bit width of the sine wave output.                    | integer | 16            |
 
+* The sine wave table width is automatically calculated based on the formula `C_SINE_WIDTH - C_MULT_WIDTH`. The deault value is 14 bits.
 
 ### Port Signals
 
@@ -183,10 +185,14 @@ $ sudo apt-get -y install make
 
 - [X] Docs: phase resolution and frequency formula
 - [X] Docs: two examples of phase and frequency calculation
+- [ ] Docs: talk about pcw
+- [ ] Docs: talk about acw
+- [ ] Docs: final architecture
+- [ ] Docs: simulation picture for multiple cases
+- [ ] Docs: make a simple AM, FM, ASK, FSK, BPSK modulator 
 - [ ] Improve Makefile
 - [ ] Add cosine output
 - [ ] Make a simple modulator (FSK? BPSK?)
-- [ ] Docuemntation: make a simple AM, FM, ASK, FSK, BPSK modulator 
 
 # About me
 
