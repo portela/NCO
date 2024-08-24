@@ -77,8 +77,6 @@ The phase resolution defines the smallest possible change in phase that the NCO 
 
 It should be noted that increasing the resolution impacts the minimum frequency (and also the quantization error). For example, a `C_PHASE_WIDTH` of 32 bits will provide a very fine phase resolution but will also result in a very low minimum frequency (as shown in the table below).
 
-The maximum frequency is defined as half the `fclk`, but the output waveform at this frequency will be of poor quality, essentially a square wave at half the `fclk` — which doesn’t require an NCO, just a single FF (or a analog PLL on a FPGA). 
-
 ```math
 f_{res} = \frac{360°}{2^{C\_PHASE\_WIDTH}}
 ```
@@ -88,20 +86,20 @@ Where:
 - `C_PHASE_WIDTH` is the bit width of the phase accumulator.
 - `f_{res}` is the phase resolution in degrees, representing the smallest frequency step that can be achieved.
 
-Example Values for Phase Width and Corresponding Resolution.  For example, enven though 32 bits provides a very fine resolution for the phase, the frequency for fcw=1 is less than a hertz (considering Fclk of 100MHZ). 
+Example Values for Phase Width and Corresponding Resolution.  For example, enven though 32 bits provides a very fine resolution for the phase, the frequency for fcw=1 is less than a hertz. 
 
-| Phase Width (`C_PHASE_WIDTH`) | Phase Resolution (Degrees) | Output Frequency for `FCW = 1` and `fclk = 100MHz` |
+| Phase Width (`C_PHASE_WIDTH`) | Phase Resolution (Degrees) | Output Frequency for `FCW = 1` and `fclk = 200MHz` |
 |-------------------------------|----------------------------|----------------------------------------------------------|
-| 2 bits                        | 90°                        | 25 MHz                                                   |
-| 4 bits                        | 22.5°                      | 6.25 MHz                                                 |
-| 8 bits                        | 1.41°                      | 390.625 kHz                                              |
-| 10 bits                       | 0.35°                      | 97.65625 kHz                                             |
-| 12 bits                       | 0.088°                     | 24.4140625 kHz                                           |
-| 14 bits                       | 0.022°                     | 6.103515625 kHz                                          |
-| 16 bits                       | 0.0055°                    | 1.52587890625 kHz                                        |
-| 20 bits                       | 0.00034°                   | 95.367431640625 Hz                                       |
-| 24 bits                       | 0.000021°                  | 5.9604644775390625 Hz                                    |
-| 32 bits                       | 0.000000084°               | 0.02328306436538696289 Hz                                |
+| 2 bits                        | 90°                        | 50 MHz                                                   |
+| 4 bits                        | 22.5°                      | 12.5 MHz                                                 |
+| 8 bits                        | 1.41°                      | 781.25 kHz                                               |
+| 10 bits                       | 0.35°                      | 195.3125 kHz                                             |
+| 12 bits                       | 0.088°                     | 48.828125 kHz                                            |
+| 14 bits                       | 0.022°                     | 12.20703125 kHz                                          |
+| 16 bits                       | 0.0055°                    | 3.0517578125 kHz                                         |
+| 20 bits                       | 0.00034°                   | 190.73486328125 Hz                                       |
+| 24 bits                       | 0.000021°                  | 11.920928955078125 Hz                                    |
+| 32 bits                       | 0.000000084°               | 0.04656612873077392578 Hz                                |
 
 ### Frequency Calculation Formula
 
