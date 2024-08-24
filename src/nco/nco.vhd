@@ -13,10 +13,11 @@ entity nco is
         rst     : in  std_logic;
         clk     : in  std_logic;
 		enable	: in  std_logic;
+        
         fcw     : in  std_logic_vector(C_PHASE_WIDTH-1 downto 0);
         pcw     : in  std_logic_vector(C_PHASE_WIDTH-1 downto 0);
-
         acw     : in  std_logic_vector(C_MULT_WIDTH-1 downto 0);
+
 		sine    : out std_logic_vector(C_SINE_WITDH-1 downto 0)
     );
 end entity;
