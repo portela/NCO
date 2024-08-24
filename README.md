@@ -181,6 +181,8 @@ $ sudo apt-get -y install make
 
 ### ToDo
 
+- [X] Docs: phase resolution and frequency formula
+- [X] Docs: two examples of phase and frequency calculation
 - [ ] Improve Makefile
 - [ ] Add cosine output
 - [ ] Make a simple modulator (FSK? BPSK?)
