@@ -75,11 +75,9 @@ The port signals provide the necessary inputs for resetting, clocking, enabling 
 
 The phase resolution defines the smallest possible change in phase that the NCO can resolve, determined by the bit width of the phase accumulator (`C_PHASE_WIDTH`). This resolution is independent of the FCW or the clock frequency, and represents the smallest phase step that can be taken by the phase accumulator, directly affecting the granularity of the phase increments. This parameter must be defined in the design phase, before synthesis. 
 
-It should be notted that the increase of the resolution impacts the minimun frequency (and also the quantization error).The maximun frequency will be defined as half the Fclk, but with a horable output wave (basicly a square wave of half the Fclk - and you don't need a NCO for it). For example, a `C_PHASE_WIDTH` of 32 bits will give a very low pahse resolution but also a very low frequency (table bellow).
-
 It should be noted that increasing the resolution impacts the minimum frequency (and also the quantization error). For example, a `C_PHASE_WIDTH` of 32 bits will provide a very fine phase resolution but will also result in a very low minimum frequency (as shown in the table below).
 
-The maximum frequency is defined as half the `fclk`, but the output waveform at this frequency will be of poor quality, essentially a square wave at half the `fclk`—which doesn’t require an NCO. 
+The maximum frequency is defined as half the `fclk`, but the output waveform at this frequency will be of poor quality, essentially a square wave at half the `fclk` — which doesn’t require an NCO, just a single FF (or a analog PLL on a FPGA). 
 
 ```math
 f_{res} = \frac{360°}{2^{C\_PHASE\_WIDTH}}
