@@ -54,7 +54,7 @@ begin
     sine_lut_I : entity work.sine_lut
         Generic Map(
             C_PHASE_WIDTH => C_PHASE_WIDTH,
-            C_SINE_WITDH => (C_SINE_WIDTH-C_MULT_WIDTH)
+            C_SINE_WIDTH => (C_SINE_WIDTH-C_MULT_WIDTH)
         )
         Port Map( 
             rst    => rst,
