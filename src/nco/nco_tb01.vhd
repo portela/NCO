@@ -10,16 +10,16 @@ end entity;
 Architecture Behavior of nco_tb01 is
 constant C_PHASE_WIDTH : integer := 10;
 constant C_MULT_WIDTH  : integer := 2;
-constant C_SINE_WITDH  : integer := 16;
+constant C_SINE_WIDTH  : integer := 16;
 
 signal rst : std_logic;
 signal clk : std_logic;
 
 signal enable : std_logic;
-signal fcw    : std_logic_vector(C_PHASE_WIDTH-1 downto 0);
-signal pcw    : std_logic_vector(C_PHASE_WIDTH-1 downto 0);
-signal acw    : std_logic_vector(C_MULT_WIDTH-1 downto 0);
-signal sine   : std_logic_vector(C_SINE_WITDH-1 downto 0);
+signal fcw    : unsigned(C_PHASE_WIDTH-1 downto 0);
+signal pcw    : unsigned(C_PHASE_WIDTH-1 downto 0);
+signal acw    : unsigned(C_MULT_WIDTH-1 downto 0);
+signal sine   : unsigned(C_SINE_WIDTH-1 downto 0);
 
 
 constant clk_period     : time := 10 ns;
@@ -35,7 +35,7 @@ begin
         Generic Map(
             C_PHASE_WIDTH => C_PHASE_WIDTH,
             C_MULT_WIDTH => C_MULT_WIDTH,
-            C_SINE_WITDH => C_SINE_WITDH
+            C_SINE_WIDTH => C_SINE_WIDTH
         )
         Port Map( 
             clk     => clk,
